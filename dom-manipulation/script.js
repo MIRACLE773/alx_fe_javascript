@@ -1,45 +1,32 @@
-// Array of quotes
-let quotes = [
-  { text: "The future belongs to those who prepare for it today.", category: "Motivation" },
-  { text: "Faith can move mountains.", category: "Faith" },
-  { text: "Code is like humor. When you have to explain it, it’s bad.", category: "Programming" },
-  { text: "Push yourself, because no one else is going to do it for you.", category: "Motivation" },
+// Array of quote objects
+const quotes = [
+  { text: "Success is no accident.", category: "Motivation" },
+  { text: "Do what you can, with what you have.", category: "Inspiration" },
+  { text: "Believe you can and you're halfway there.", category: "Motivation" },
 ];
 
-// Function to display a random quote
-function displayRandomQuote() {
-  const quoteDisplay = document.getElementById("quoteDisplay");
-
+// Function to show a random quote
+function showRandomQuote() {
   const randomIndex = Math.floor(Math.random() * quotes.length);
-  const randomQuote = quotes[randomIndex];
-
-  quoteDisplay.textContent = `"${randomQuote.text}" — [${randomQuote.category}]`;
-}
-
-// Event listener for "Show New Quote" button
-document.getElementById("newQuote").addEventListener("click", displayRandomQuote);
-
-// Function to add a new quote dynamically
-function addQuote() {
-  const textInput = document.getElementById("newQuoteText");
-  const categoryInput = document.getElementById("newQuoteCategory");
-
-  const newText = textInput.value.trim();
-  const newCategory = categoryInput.value.trim();
-
-  if (newText === "" || newCategory === "") {
-    alert("Please fill in both fields before adding a quote.");
-    return;
-  }
-
-  // Add new quote to the array
-  quotes.push({ text: newText, category: newCategory });
-
-  // Update DOM immediately
   const quoteDisplay = document.getElementById("quoteDisplay");
-  quoteDisplay.textContent = `"${newText}" — [${newCategory}]`;
-
-  // Clear input fields
-  textInput.value = "";
-  categoryInput.value = "";
+  // ✅ Use innerHTML instead of textContent
+  quoteDisplay.innerHTML = `"${quotes[randomIndex].text}" - <em>${quotes[randomIndex].category}</em>`;
 }
+
+// Function to add a new quote
+function addQuote() {
+  const text = document.getElementById("newQuoteText").value;
+  const category = document.getElementById("newQuoteCategory").value;
+
+  if (text && category) {
+    quotes.push({ text, category });
+    alert("Quote added successfully!");
+    document.getElementById("newQuoteText").value = "";
+    document.getElementById("newQuoteCategory").value = "";
+  } else {
+    alert("Please enter both quote text and category!");
+  }
+}
+
+// Event listener for showing a new quote
+document.getElementById("newQuote").addEventListener("click", showRandomQuote);
