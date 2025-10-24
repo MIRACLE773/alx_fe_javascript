@@ -3,22 +3,50 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dynamic Quote Generator with Filter</title>
+  <title>Dynamic Quote Generator with Server Sync</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f3f3f3;
+      padding: 20px;
+      text-align: center;
+    }
+    #quoteContainer {
+      background: white;
+      padding: 20px;
+      margin: 20px auto;
+      border-radius: 10px;
+      width: 60%;
+      box-shadow: 0px 0px 8px rgba(0,0,0,0.2);
+    }
+    #syncStatus {
+      color: green;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    button {
+      padding: 10px 15px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
 </head>
 <body>
   <h1>Dynamic Quote Generator</h1>
 
-  <select id="categoryFilter" onchange="filterQuotes()">
-    <option value="all">All Categories</option>
-  </select>
+  <div id="quoteContainer">
+    <p id="quoteText">Loading quotes...</p>
+    <p id="quoteAuthor"></p>
+  </div>
 
-  <div id="quoteDisplay"></div>
-
-  <input type="text" id="quoteInput" placeholder="Enter new quote">
-  <input type="text" id="categoryInput" placeholder="Enter category">
-  <button onclick="addQuote()">Add Quote</button>
-
-  <button onclick="showRandomQuote()">Show Random Quote</button>
+  <button id="syncButton">Sync with Server</button>
+  <p id="syncStatus"></p>
 
   <script src="script.js"></script>
 </body>
